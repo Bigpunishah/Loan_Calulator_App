@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Simple Money Calculator</string>
+    <string name="loan_calculator_string">Loan Calculator</string>
+    <string name="saving_calculator_string">Saving Calculator</string>
+</resources>
