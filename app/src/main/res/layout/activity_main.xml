@@ -10,10 +10,11 @@
         android:id="@+id/button"
         android:layout_width="189dp"
         android:layout_height="64dp"
+        android:layout_marginTop="147dp"
         android:text="@string/loan_calculator_string"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="147dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button2"
