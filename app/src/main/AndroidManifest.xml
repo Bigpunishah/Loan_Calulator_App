@@ -13,6 +13,38 @@
         android:theme="@style/Theme.SimpleMoneyCalculator"
         tools:targetApi="31">
         <activity
+            android:name=".LoanCalculatorActivity"
+            android:exported="false"
+            android:parentActivityName=".LoanCalculatorActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".SavingsCalculatorActivity"
+            android:exported="false"
+            android:parentActivityName=".SavingsCalculatorActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".SavedSavingsActivity"
+            android:exported="false"
+            android:parentActivityName=".SavedSavingsActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".SavedLoansActivity"
+            android:exported="false"
+            android:parentActivityName=".SavedLoansActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -8,6 +8,8 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Assigning variables
+    //Pick up here!
 
 
     @Override
@@ -15,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+
 
 
 
