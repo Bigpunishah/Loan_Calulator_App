@@ -6,5 +6,13 @@
     <string name="loan_term_string">Loan Term</string>
     <string name="interest_rate_string">Interest Rate</string>
     <string name="monthly_apr_string">Monthly APR</string>
-    <string name="payment_string">Payment</string>
+    <string name="payment_string">Pay Rate</string>
+    <string name="calculate_string">Calculate</string>
+
+    <string-array name="payment_frequency_spinner_strings">
+        <item>Monthly</item>
+        <item>Bi-Weekly</item>
+        <item>Weekly</item>
+        <item>Daily</item>
+    </string-array>
 </resources>
