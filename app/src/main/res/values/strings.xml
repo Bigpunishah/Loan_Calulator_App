@@ -8,6 +8,7 @@
     <string name="monthly_apr_string">Monthly APR</string>
     <string name="payment_string">Pay Rate</string>
     <string name="calculate_string">Calculate</string>
+    <string name="total_interest_string">Total Interest</string>
 
     <string-array name="payment_frequency_spinner_strings">
         <item>Monthly</item>
