@@ -7,6 +7,45 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/totalPaymentsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
+        android:text="TextView"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/totalInterestOnlyTextView"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/paymentEveryRateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
+        android:text="TextView"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/totalPaymentsOnlyTextView"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/totalInterestTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="119dp"
+        android:text="TextView"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
         android:id="@+id/loanAmountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,7 +114,7 @@
         android:layout_marginTop="41dp"
         android:ems="10"
         android:hint="Years"
-        android:inputType="number|numberDecimal"
+        android:inputType="number"
         android:minHeight="48dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/loanTermMonthsEditText"
@@ -87,10 +126,10 @@
         android:layout_width="104dp"
         android:layout_height="47dp"
         android:layout_marginTop="41dp"
-        android:layout_marginEnd="26dp"
+        android:layout_marginEnd="25dp"
         android:ems="10"
         android:hint="Months"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:minHeight="48dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,25 +138,25 @@
 
     <EditText
         android:id="@+id/interestRateEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="94dp"
+        android:layout_height="45dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="88dp"
         android:ems="10"
         android:hint="6.5"
+        android:importantForAutofill="no"
         android:inputType="number|numberDecimal"
         android:minHeight="48dp"
         android:textAlignment="textEnd"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loanTermYearsEditText"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/loanTermYearsEditText" />
 
     <Spinner
         android:id="@+id/payRateSpinner"
         android:layout_width="210dp"
         android:layout_height="38dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="23dp"
+        android:layout_marginEnd="25dp"
         android:entries="@array/payment_frequency_spinner_strings"
         android:spinnerMode="dropdown"
         android:textAlignment="center"
@@ -130,11 +169,12 @@
         android:layout_width="23dp"
         android:layout_height="35dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="192dp"
+        android:layout_marginTop="189dp"
         android:text="%"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/interestRateEditText"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -146,17 +186,44 @@
         app:cornerRadius="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.527" />
+        app:layout_constraintVertical_bias="0.541" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/paymentEveryRateOnlyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Need to add the rest of the info calculated"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="491dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="20dp"
+        android:text="Payment every..."
+        android:textSize="25sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/totalPaymentsOnlyTextView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/totalPaymentsOnlyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="20dp"
+        android:text="Total of .. payments"
+        android:textSize="25sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/totalInterestOnlyTextView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/totalInterestOnlyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="119dp"
+        android:text="@string/total_interest_string"
+        android:textSize="25sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
