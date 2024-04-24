@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/loanCalculatorButton"
         android:layout_width="189dp"
         android:layout_height="64dp"
         android:layout_marginTop="150dp"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/savingCalculatorButton"
         android:layout_width="189dp"
         android:layout_height="64dp"
         android:text="@string/saving_calculator_string"

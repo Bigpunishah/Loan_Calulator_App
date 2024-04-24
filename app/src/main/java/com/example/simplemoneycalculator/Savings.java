@@ -1,4 +1,4 @@
 package com.example.simplemoneycalculator;
 
-public class LoansDB {
+public class Savings {
 }

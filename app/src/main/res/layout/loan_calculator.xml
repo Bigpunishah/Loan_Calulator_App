@@ -149,7 +149,12 @@
         android:minHeight="48dp"
         android:textAlignment="textEnd"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
         app:layout_constraintTop_toBottomOf="@+id/loanTermYearsEditText" />
+=======
+        app:layout_constraintTop_toBottomOf="@+id/loanTermYearsEditText"
+        tools:ignore="TouchTargetSizeCheck" />
+>>>>>>> new_branch_name
 
     <Spinner
         android:id="@+id/payRateSpinner"
@@ -197,7 +202,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="20dp"
         android:text="Payment every..."
+<<<<<<< HEAD
         android:textSize="25sp"
+=======
+        android:textSize="20sp"
+>>>>>>> new_branch_name
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/totalPaymentsOnlyTextView"
         app:layout_constraintStart_toStartOf="parent" />
@@ -209,7 +218,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="20dp"
         android:text="Total of .. payments"
+<<<<<<< HEAD
         android:textSize="25sp"
+=======
+        android:textSize="20sp"
+>>>>>>> new_branch_name
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/totalInterestOnlyTextView"
         app:layout_constraintStart_toStartOf="parent" />
@@ -221,7 +234,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="119dp"
         android:text="@string/total_interest_string"
+<<<<<<< HEAD
         android:textSize="25sp"
+=======
+        android:textSize="20sp"
+>>>>>>> new_branch_name
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
