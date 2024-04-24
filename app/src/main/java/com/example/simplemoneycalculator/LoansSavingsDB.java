@@ -1,7 +1,7 @@
 package com.example.simplemoneycalculator;
 
-public class LoansDB {
+public class LoansSavingsDB {
 
     //Database contents
-    public static final String DB_NAME
+//    public static final String DB_NAME
 }

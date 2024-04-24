@@ -2,10 +2,14 @@ package com.example.simplemoneycalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -14,7 +18,8 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
-public class LoanCalculatorActivity extends AppCompatActivity {
+public class LoanCalculatorActivity extends AppCompatActivity implements
+        View.OnClickListener, LoanInfoDialog.LoanInfoDialogListener {
 
     //Create all variables that will be associated with the activity
     private EditText loanAmountEditText;
@@ -55,13 +60,21 @@ public class LoanCalculatorActivity extends AppCompatActivity {
         totalPaymentsTextView = (TextView) findViewById(R.id.totalPaymentsTextView);
         totalInterestTextView = (TextView) findViewById(R.id.totalInterestTextView);
 
-        calculateLoanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        calculateLoanButton.setOnClickListener(this);
+    }
+
+    //Correct way to use onClickListener
+    //calculateLoanButton.setOnClickListener(this);
+    //implements android.view.View.OnClickListener
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.calculateLoanButton:
                 calculateAndDisplay();
-                //currently crashing when pressing the button. Find the bug & terminate it
-            }
-        });
+                break;
+            default:
+                break;
+        }
     }
 
     public void calculateAndDisplay(){
@@ -71,6 +84,10 @@ public class LoanCalculatorActivity extends AppCompatActivity {
         double payments;
         double totalInterest;
         double totalPayback;
+
+        //Hide keyboard
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
         //Formula for monthly loan payments:
         //Interest rate is divided by 100 to turn whole number into percent value
@@ -233,7 +250,13 @@ public class LoanCalculatorActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.menuSave:
                 //execute saving loan
-                //send to new view where you input the name & descr of loan
+                //Ensuring data is in proper positions & the calculations are correct.
+                calculateAndDisplay();
+                //If the default value is there then it has not been calculated.
+                if(!paymentEveryRateTextView.getText().toString().equals("TextView")){
+                    LoanInfoDialog dialog = new LoanInfoDialog(LoanCalculatorActivity.this);
+                    dialog.show();
+                }
                 return true;
             case R.id.menuClear:
                 //execute clearing the info in the fields
@@ -243,5 +266,11 @@ public class LoanCalculatorActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    @Override
+    public void onSaveClicked(String title, String description) {
+
     }
 }

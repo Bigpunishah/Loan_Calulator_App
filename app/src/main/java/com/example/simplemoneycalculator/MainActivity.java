@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Changing views from the MainActivity
+        //Check LoanCalculatorActivity.java to see proper implementation of onClickListener
         loanCalculatorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

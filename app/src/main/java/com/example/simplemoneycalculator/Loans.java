@@ -1,2 +1,4 @@
-package com.example.simplemoneycalculator;public class Loans {
+package com.example.simplemoneycalculator;
+
+public class Loans {
 }
