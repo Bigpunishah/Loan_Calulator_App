@@ -7,7 +7,7 @@
         android:title="Save"
         android:icon="@drawable/ic_save_foreground"
         android:orderInCategory="2" />
-    <item android:id="@+id/menuCancel"
+    <item android:id="@+id/menuClear"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_cancel_foreground"
         android:title="Cancel"

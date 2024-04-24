@@ -114,7 +114,7 @@
         android:layout_marginTop="41dp"
         android:ems="10"
         android:hint="Years"
-        android:inputType="number|numberDecimal"
+        android:inputType="number"
         android:minHeight="48dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/loanTermMonthsEditText"
@@ -129,7 +129,7 @@
         android:layout_marginEnd="25dp"
         android:ems="10"
         android:hint="Months"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:minHeight="48dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -138,10 +138,10 @@
 
     <EditText
         android:id="@+id/interestRateEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="94dp"
+        android:layout_height="45dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="88dp"
         android:ems="10"
         android:hint="6.5"
         android:importantForAutofill="no"
@@ -149,7 +149,8 @@
         android:minHeight="48dp"
         android:textAlignment="textEnd"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loanTermYearsEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/loanTermYearsEditText"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <Spinner
         android:id="@+id/payRateSpinner"
@@ -169,11 +170,12 @@
         android:layout_width="23dp"
         android:layout_height="35dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="192dp"
+        android:layout_marginTop="189dp"
         android:text="%"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/interestRateEditText"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -195,8 +197,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="20dp"
-        android:text="TextView"
-        android:textSize="25sp"
+        android:text="Payment every..."
+        android:textSize="20sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/totalPaymentsOnlyTextView"
         app:layout_constraintStart_toStartOf="parent" />
@@ -207,8 +209,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="20dp"
-        android:text="TextView"
-        android:textSize="25sp"
+        android:text="Total of .. payments"
+        android:textSize="20sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/totalInterestOnlyTextView"
         app:layout_constraintStart_toStartOf="parent" />
@@ -220,7 +222,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="119dp"
         android:text="@string/total_interest_string"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
