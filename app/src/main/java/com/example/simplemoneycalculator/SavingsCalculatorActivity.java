@@ -14,6 +14,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 public class SavingsCalculatorActivity extends AppCompatActivity implements View.OnClickListener{
 
     //create the values in xml
@@ -37,11 +39,8 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
     private TextView savingsTotalInterestEarnedCalculatedTextView;
     private TextView savingsTotalCalculatedTextView;
 
-    //scroll view for putting back at top
+    //scroll view for putting view back at top or bottom
     private ScrollView savingsCalculatorScrollView;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,11 +72,67 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
         savingsCalculatorScrollView = (ScrollView) findViewById(R.id.savingsCalculatorScrollView);
     }
 
+    public void calculateAndDisplay(){
+        double initialAmount;
+        double totalAmount;
+        double totalInterest;
+        double totalContributions;
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        //Ensure values are in place to calculate
+        if(savingsInitialDepositEditText.getText().toString().isEmpty()){
+            Toast.makeText(this, "Initial Deposit must have a value", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        initialAmount = Double.parseDouble(savingsInitialDepositEditText.getText().toString());
+
+        int savingsSpinnerFrequencySpinner = savingsDepositFrequencySpinner.getSelectedItemPosition();
+        double frequentDeposit = Double.parseDouble(savingsYearlyDepositEditText.getText().toString());
+        double years = savingsDurationYearsEditText.getText().toString().isEmpty() ? 0 : Double.parseDouble(savingsDurationYearsEditText.getText().toString());
+        double months = savingsDurationMonthsEditText.getText().toString().isEmpty() ? 0 : Double.parseDouble(savingsDurationMonthsEditText.getText().toString());
+        double durationMonths = (years * 12) + months;
+        double interestRate = savingsYearlyInterestEditText.getText().toString().isEmpty() ? 0 : Double.parseDouble(savingsYearlyInterestEditText.getText().toString()) / 100;
+
+
+        switch (savingsSpinnerFrequencySpinner){
+            case 0:
+                //Yearly
+                totalAmount = initialAmount * Math.pow(1 + interestRate, durationMonths / 12.0) + frequentDeposit * ((Math.pow(1 + interestRate, durationMonths / 12.0) - 1) / interestRate);
+                totalContributions = initialAmount + (frequentDeposit * (durationMonths / 12));
+                totalInterest = totalAmount - totalContributions;
+
+                savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths/12) + " Contributions");
+
+
+                savingsInitialAmountCalculatedTextView.setText("$"+initialAmount);
+                savingsTotalContributionsCalculatedTextView.setText("$"+df.format(totalContributions));
+                savingsTotalInterestEarnedCalculatedTextView.setText("$"+df.format(totalInterest));
+                savingsTotalCalculatedTextView.setText("$"+df.format(totalAmount));
+                makeFieldsVisible();
+                break;
+            case 1:
+                //Monthly
+                break;
+            case 2:
+                //Bi-Weekly
+                break;
+            case 3:
+                //Weekly
+                break;
+            case 4:
+                //Daily
+                break;
+            default:
+                break;
+        }
+
+    }
+
     @Override
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.savingsCalculateSavingsButton:
-                makeFieldsVisible();
+                calculateAndDisplay();
                 break;
             default:
                 break;
@@ -93,7 +148,8 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
         savingsTotalContributionsCalculatedTextView.setVisibility(View.VISIBLE);
         savingsTotalInterestEarnedCalculatedTextView.setVisibility(View.VISIBLE);
         savingsTotalCalculatedTextView.setVisibility(View.VISIBLE);
-        savingsCalculatorScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+        savingsCalculatorScrollView.smoothScrollTo(0,500);
+        //Hide keyboard next
     }
 
     public void clearAllFields(){
@@ -113,7 +169,7 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
         savingsTotalCalculatedTextView.setVisibility(View.INVISIBLE);
 
         //send the scroll view back to top
-        savingsCalculatorScrollView.fullScroll(ScrollView.FOCUS_UP);
+        savingsCalculatorScrollView.smoothScrollTo(0,0);
 
     }
 
@@ -131,6 +187,7 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
         switch (item.getItemId()){
             case R.id.menuSave:
                 //execute saving savings
+                calculateAndDisplay(); //Calculate before saving values
                 return true;
             case R.id.menuClear:
                 //execute clearing the info in the fields
