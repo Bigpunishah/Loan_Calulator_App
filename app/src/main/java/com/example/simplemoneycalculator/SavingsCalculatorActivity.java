@@ -97,35 +97,105 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
         switch (savingsSpinnerFrequencySpinner){
             case 0:
                 //Yearly
-                totalAmount = initialAmount * Math.pow(1 + interestRate, durationMonths / 12.0) + frequentDeposit * ((Math.pow(1 + interestRate, durationMonths / 12.0) - 1) / interestRate);
-                totalContributions = initialAmount + (frequentDeposit * (durationMonths / 12));
+                if(interestRate == 0){
+                    totalAmount = initialAmount + frequentDeposit * (durationMonths / 12);
+                }else{
+                    totalAmount = initialAmount * Math.pow(1 + interestRate, durationMonths / 12.0) + frequentDeposit * ((Math.pow(1 + interestRate, durationMonths / 12.0) - 1) / interestRate);
+                }
+                totalContributions = (frequentDeposit * (durationMonths / 12));
                 totalInterest = totalAmount - totalContributions;
 
                 savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths/12) + " Contributions");
 
 
                 savingsInitialAmountCalculatedTextView.setText("$"+initialAmount);
-                savingsTotalContributionsCalculatedTextView.setText("$"+df.format(totalContributions));
-                savingsTotalInterestEarnedCalculatedTextView.setText("$"+df.format(totalInterest));
+                savingsTotalContributionsCalculatedTextView.setText("+$"+df.format(totalContributions));
+                savingsTotalInterestEarnedCalculatedTextView.setText("+$"+df.format(totalInterest));
                 savingsTotalCalculatedTextView.setText("$"+df.format(totalAmount));
                 makeFieldsVisible();
                 break;
             case 1:
                 //Monthly
+                if(interestRate == 0){
+                    totalAmount = initialAmount + frequentDeposit * durationMonths;
+                }else{
+                    totalAmount = initialAmount * Math.pow(1 + interestRate, durationMonths) + frequentDeposit * ((Math.pow(1 + interestRate, durationMonths) - 1) / interestRate);
+                }
+                totalContributions = (frequentDeposit * durationMonths);
+                totalInterest = totalAmount - totalContributions;
+
+                savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths) + " Contributions");
+
+
+                savingsInitialAmountCalculatedTextView.setText("+$"+initialAmount);
+                savingsTotalContributionsCalculatedTextView.setText("+$"+df.format(totalContributions));
+                savingsTotalInterestEarnedCalculatedTextView.setText("+$"+df.format(totalInterest));
+                savingsTotalCalculatedTextView.setText("$"+df.format(totalAmount));
+                makeFieldsVisible();
                 break;
             case 2:
                 //Bi-Weekly
+                if(interestRate == 0){
+                    totalAmount = initialAmount + frequentDeposit * (durationMonths / 12) * 26;
+                }else{
+                    double pow = Math.pow(1 + interestRate, durationMonths / 12 * 26);
+                    totalAmount = initialAmount * pow + frequentDeposit * ((pow - 1) / interestRate);
+                }
+                totalContributions = (frequentDeposit * durationMonths / 12 * 26);
+                totalInterest = totalAmount - totalContributions;
+
+                savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths / 12 * 26) + " Contributions");
+
+
+                savingsInitialAmountCalculatedTextView.setText("$"+initialAmount);
+                savingsTotalContributionsCalculatedTextView.setText("+$"+df.format(totalContributions));
+                savingsTotalInterestEarnedCalculatedTextView.setText("+$"+df.format(totalInterest));
+                savingsTotalCalculatedTextView.setText("$"+df.format(totalAmount));
+                makeFieldsVisible();
                 break;
             case 3:
+                if(interestRate == 0){
+                    totalAmount = initialAmount + frequentDeposit * (durationMonths / 12) * 52;
+                }else{
+                    double pow = Math.pow(1 + interestRate, durationMonths / 12 * 52);
+                    totalAmount = initialAmount * pow + frequentDeposit * ((pow - 1) / interestRate);
+                }
+                totalContributions = (frequentDeposit * durationMonths / 12 * 52);
+                totalInterest = totalAmount - totalContributions;
+
+                savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths / 12 * 52) + " Contributions");
+
+
+                savingsInitialAmountCalculatedTextView.setText("$"+initialAmount);
+                savingsTotalContributionsCalculatedTextView.setText("+$"+df.format(totalContributions));
+                savingsTotalInterestEarnedCalculatedTextView.setText("+$"+df.format(totalInterest));
+                savingsTotalCalculatedTextView.setText("$"+df.format(totalAmount));
+                makeFieldsVisible();
                 //Weekly
                 break;
             case 4:
                 //Daily
+                if(interestRate == 0){
+                    totalAmount = initialAmount + frequentDeposit * (durationMonths / 12) * 365;
+                }else{
+                    double pow = Math.pow(1 + interestRate, durationMonths / 12 * 365);
+                    totalAmount = initialAmount * pow + frequentDeposit * ((pow - 1) / interestRate);
+                }
+                totalContributions = (frequentDeposit * durationMonths / 12 * 365);
+                totalInterest = totalAmount - totalContributions;
+
+                savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths / 12 * 365) + " Contributions");
+
+
+                savingsInitialAmountCalculatedTextView.setText("$"+initialAmount);
+                savingsTotalContributionsCalculatedTextView.setText("+$"+df.format(totalContributions));
+                savingsTotalInterestEarnedCalculatedTextView.setText("+$"+df.format(totalInterest));
+                savingsTotalCalculatedTextView.setText("$"+df.format(totalAmount));
+                makeFieldsVisible();
                 break;
             default:
                 break;
         }
-
     }
 
     @Override
