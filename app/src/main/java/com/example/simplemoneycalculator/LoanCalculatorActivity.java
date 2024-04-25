@@ -2,14 +2,10 @@ package com.example.simplemoneycalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -240,7 +236,7 @@ public class LoanCalculatorActivity extends AppCompatActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         //Inflate the menu
-        getMenuInflater().inflate(R.menu.save_loan_menu, menu);
+        getMenuInflater().inflate(R.menu.save_loan_savings_menu, menu);
         return true;
     }
 
