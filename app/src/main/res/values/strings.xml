@@ -2,11 +2,11 @@
     <string name="app_name">Money Calculator</string>
     <string name="loan_calculator_string">Loan Calculator</string>
     <string name="saving_calculator_string">Saving Calculator</string>
-    <string name="loan_amount_string">Loan Amount</string>
-    <string name="loan_term_string">Loan Term</string>
-    <string name="interest_rate_string">Interest Rate</string>
+    <string name="loan_amount_string">Loan Amount:</string>
+    <string name="loan_term_string">Loan Term:</string>
+    <string name="interest_rate_string">Interest Rate:</string>
     <string name="monthly_apr_string">Monthly APR</string>
-    <string name="payment_string">Pay Rate</string>
+    <string name="payment_string">Pay Rate:</string>
     <string name="calculate_string">Calculate</string>
     <string name="total_interest_string">Total Interest</string>
     <string name="description_string">Description</string>
@@ -20,4 +20,17 @@
         <item>Weekly</item>
         <item>Daily</item>
     </string-array>
+
+    <string-array name="savings_frequency_spinner_strings">
+        <item>Yearly</item>
+        <item>Monthly</item>
+        <item>Bi-Weekly</item>
+        <item>Weekly</item>
+        <item>Daily</item>
+    </string-array>
+    <string name="initial_deposit_string">Initial Deposit:</string>
+    <string name="deposit_frequency_string">Deposit Frequency:</string>
+    <string name="saving_duration_string">Duration:</string>
+    <string name="yearly_interest_rate_string">Yearly Interest:</string>
+    <string name="continuous_deposit">Yearly Deposit:</string>
 </resources>
