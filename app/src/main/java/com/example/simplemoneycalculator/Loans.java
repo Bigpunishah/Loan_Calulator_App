@@ -8,7 +8,10 @@ public class Loans {
     private double loanAmount;
     private double loanTermInYears;
     private double interestRate;
-    private double payRate;
+    private String payRate;
+    private double payments;
+    private double totalPayback;
+    private double totalInterest;
 
     public Loans(){
         title = "";
@@ -16,10 +19,13 @@ public class Loans {
         loanAmount = 0;
         loanTermInYears = 0;
         interestRate = 0;
-        payRate = 0;
+        payRate = "";
+        payments = 0;
+        totalPayback = 0;
+        totalInterest = 0;
     }
 
-    public Loans(int listId, String title, String description, double loanAmount, double loanTermInYears, double interestRate, double payRate){
+    public Loans(int listId, String title, String description, double loanAmount, double loanTermInYears, double interestRate, String payRate, double payments, double totalPayback, double totalInterest){
         this.listId = listId;
         this.title = title;
         this.description = description;
@@ -27,9 +33,12 @@ public class Loans {
         this.loanTermInYears = loanTermInYears;
         this.interestRate = interestRate;
         this.payRate = payRate;
+        this.payments = payments;
+        this.totalPayback = totalPayback;
+        this.totalInterest = totalInterest;
     }
 
-    public Loans(int listId, int loanId, String title, String description, double loanAmount, double loanTermInYears, double interestRate, double payRate){
+    public Loans(int listId, int loanId, String title, String description, double loanAmount, double loanTermInYears, double interestRate, String payRate, double payments, double totalPayback, double totalInterest){
         this.listId = listId;
         this.loanId = loanId;
         this.title = title;
@@ -38,6 +47,9 @@ public class Loans {
         this.loanTermInYears = loanTermInYears;
         this.interestRate = interestRate;
         this.payRate = payRate;
+        this.payments = payments;
+        this.totalPayback = totalPayback;
+        this.totalInterest = totalInterest;
     }
 
     //Getter & Setter
@@ -97,11 +109,35 @@ public class Loans {
         this.interestRate = interestRate;
     }
 
-    public double getPayRate() {
+    public String getPayRate() {
         return payRate;
     }
 
-    public void setPayRate(double payRate) {
+    public void setPayRate(String payRate) {
         this.payRate = payRate;
+    }
+
+    public double getPayments() {
+        return payments;
+    }
+
+    public void setPayments(double payments) {
+        this.payments = payments;
+    }
+
+    public double getTotalPayback() {
+        return totalPayback;
+    }
+
+    public void setTotalPayback(double totalPayback) {
+        this.totalPayback = totalPayback;
+    }
+
+    public double getTotalInterest() {
+        return totalInterest;
+    }
+
+    public void setTotalInterest(double totalInterest) {
+        this.totalInterest = totalInterest;
     }
 }

@@ -86,8 +86,8 @@ public class LoanCalculatorActivity extends AppCompatActivity implements
         double totalPayback;
 
         //Hide keyboard
-        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+//        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+//        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
         //Formula for monthly loan payments:
         //Interest rate is divided by 100 to turn whole number into percent value

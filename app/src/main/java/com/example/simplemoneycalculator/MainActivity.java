@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     //Create variables
     private Button loanCalculatorButton;
@@ -25,26 +25,27 @@ public class MainActivity extends AppCompatActivity {
         loanCalculatorButton = (Button) findViewById(R.id.loanCalculatorButton);
         savingCalculatorButton = (Button) findViewById(R.id.savingCalculatorButton);
 
-
+        //implements android.view.View.OnClickListener
         //Changing views from the MainActivity
-        //Check LoanCalculatorActivity.java to see proper implementation of onClickListener
-        loanCalculatorButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        loanCalculatorButton.setOnClickListener(this);
+        savingCalculatorButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.loanCalculatorButton:
                 //Create new intent & then start that intent
                 Intent intent = new Intent(MainActivity.this, LoanCalculatorActivity.class);
                 startActivity(intent);
-            }
-        });
-
-
-        savingCalculatorButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SavingsCalculatorActivity.class);
-                startActivity(intent);
-            }
-        });
+                break;
+            case R.id.savingCalculatorButton:
+                Intent intent1 = new Intent(MainActivity.this, SavingsCalculatorActivity.class);
+                startActivity(intent1);
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -81,4 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 }
