@@ -1,6 +1,6 @@
 package com.example.simplemoneycalculator;
 
-public class Loans {
+public class Loan {
     private int loanId;
     private int listId;
     private String title;
@@ -13,7 +13,7 @@ public class Loans {
     private double totalPayback;
     private double totalInterest;
 
-    public Loans(){
+    public Loan(){
         title = "";
         description = "";
         loanAmount = 0;
@@ -25,7 +25,7 @@ public class Loans {
         totalInterest = 0;
     }
 
-    public Loans(int listId, String title, String description, double loanAmount, double loanTermInYears, double interestRate, String payRate, double payments, double totalPayback, double totalInterest){
+    public Loan(int listId, String title, String description, double loanAmount, double loanTermInYears, double interestRate, String payRate, double payments, double totalPayback, double totalInterest){
         this.listId = listId;
         this.title = title;
         this.description = description;
@@ -38,7 +38,7 @@ public class Loans {
         this.totalInterest = totalInterest;
     }
 
-    public Loans(int listId, int loanId, String title, String description, double loanAmount, double loanTermInYears, double interestRate, String payRate, double payments, double totalPayback, double totalInterest){
+    public Loan(int listId, int loanId, String title, String description, double loanAmount, double loanTermInYears, double interestRate, String payRate, double payments, double totalPayback, double totalInterest){
         this.listId = listId;
         this.loanId = loanId;
         this.title = title;
