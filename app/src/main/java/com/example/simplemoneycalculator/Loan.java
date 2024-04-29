@@ -10,6 +10,7 @@ public class Loan {
     private double interestRate;
     private String payRate;
     private double payments;
+    private double numberOfPayments;
     private double totalPayback;
     private double totalInterest;
 
@@ -25,7 +26,7 @@ public class Loan {
         totalInterest = 0;
     }
 
-    public Loan(int listId, String title, String description, double loanAmount, double loanTermInYears, double interestRate, String payRate, double payments, double totalPayback, double totalInterest){
+    public Loan(int listId, String title, String description, double loanAmount, double loanTermInYears, double interestRate, String payRate, double payments, double numberOfPayments, double totalPayback, double totalInterest){
         this.listId = listId;
         this.title = title;
         this.description = description;
@@ -34,11 +35,12 @@ public class Loan {
         this.interestRate = interestRate;
         this.payRate = payRate;
         this.payments = payments;
+        this.numberOfPayments = numberOfPayments;
         this.totalPayback = totalPayback;
         this.totalInterest = totalInterest;
     }
 
-    public Loan(int listId, int loanId, String title, String description, double loanAmount, double loanTermInYears, double interestRate, String payRate, double payments, double totalPayback, double totalInterest){
+    public Loan(int listId, int loanId, String title, String description, double loanAmount, double loanTermInYears, double interestRate, String payRate, double payments, double numberOfPayments, double totalPayback, double totalInterest){
         this.listId = listId;
         this.loanId = loanId;
         this.title = title;
@@ -48,6 +50,7 @@ public class Loan {
         this.interestRate = interestRate;
         this.payRate = payRate;
         this.payments = payments;
+        this.numberOfPayments = numberOfPayments;
         this.totalPayback = totalPayback;
         this.totalInterest = totalInterest;
     }
@@ -139,5 +142,13 @@ public class Loan {
 
     public void setTotalInterest(double totalInterest) {
         this.totalInterest = totalInterest;
+    }
+
+    public double getNumberOfPayments() {
+        return numberOfPayments;
+    }
+
+    public void setNumberOfPayments(double numberOfPayments) {
+        this.numberOfPayments = numberOfPayments;
     }
 }

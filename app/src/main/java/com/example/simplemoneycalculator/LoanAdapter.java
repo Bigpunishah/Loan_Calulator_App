@@ -1,45 +1,51 @@
 package com.example.simplemoneycalculator;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class LoanAdapter extends ArrayAdapter<List> {
+public class LoanAdapter extends ArrayAdapter<Loan>  {
+    private TextView titleTextView;
+    private TextView valueTextView;
 
-    private ArrayList<List> loansList;
+    private ArrayList<Loan> loans;
     private Context context;
-
-    public LoanAdapter(Context context, int resource, ArrayList<List> loansList) {
-        super(context, resource, loansList);
+    //This file is for the single item .xml layout that will be populated for the listview
+    public LoanAdapter(Context context, int resource, ArrayList<Loan> loans) {
+        super(context, resource, loans);
         this.context = context;
-        this.loansList = loansList;
+        this.loans = loans;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.saved_loans, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.single_item, parent, false);
         }
 
         // Get the loan object for this position
-        List list = loansList.get(position);
+        Loan loan = loans.get(position);
 
         // Find TextViews in list item layout
-        TextView titleTextView = convertView.findViewById(R.id.titleTextView);
-        TextView valueTextView = convertView.findViewById(R.id.valueTextView);
+        titleTextView = convertView.findViewById(R.id.titleTextView);
+        valueTextView = convertView.findViewById(R.id.valueTextView);
 
         // Set loan data to TextViews
-        titleTextView.setText(list.getTitle());
-        valueTextView.setText(String.valueOf(list.getValue())); // Assuming value is an integer
-
+        if(loan == null){
+            titleTextView.setText("No Loans saved");
+            valueTextView.setText("Go save one from the Loan Calculator");
+        } else {
+            titleTextView.setText("Loan Title: " + loan.getTitle());
+            valueTextView.setText("Loan Amount: " + String.valueOf(loan.getLoanAmount()));
+        }
         return convertView;
     }
+
+
 }

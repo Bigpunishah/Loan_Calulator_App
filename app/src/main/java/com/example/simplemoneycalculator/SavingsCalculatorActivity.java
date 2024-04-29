@@ -99,11 +99,14 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
                 //Yearly
                 if(interestRate == 0){
                     totalAmount = initialAmount + frequentDeposit * (durationMonths / 12);
+                    totalInterest = 0;
                 }else{
                     totalAmount = initialAmount * Math.pow(1 + interestRate, durationMonths / 12.0) + frequentDeposit * ((Math.pow(1 + interestRate, durationMonths / 12.0) - 1) / interestRate);
+                    totalContributions = (frequentDeposit * (durationMonths / 12));
+                    totalInterest = totalAmount - totalContributions;
                 }
                 totalContributions = (frequentDeposit * (durationMonths / 12));
-                totalInterest = totalAmount - totalContributions;
+
 
                 savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths/12) + " Contributions");
 
@@ -118,11 +121,14 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
                 //Monthly
                 if(interestRate == 0){
                     totalAmount = initialAmount + frequentDeposit * durationMonths;
+                    totalInterest = 0;
                 }else{
                     totalAmount = initialAmount * Math.pow(1 + interestRate, durationMonths) + frequentDeposit * ((Math.pow(1 + interestRate, durationMonths) - 1) / interestRate);
+                    totalContributions = (frequentDeposit * durationMonths);
+                    totalInterest = totalAmount - totalContributions;
                 }
                 totalContributions = (frequentDeposit * durationMonths);
-                totalInterest = totalAmount - totalContributions;
+
 
                 savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths) + " Contributions");
 
@@ -137,12 +143,16 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
                 //Bi-Weekly
                 if(interestRate == 0){
                     totalAmount = initialAmount + frequentDeposit * (durationMonths / 12) * 26;
+                    totalInterest = 0;
+
                 }else{
                     double pow = Math.pow(1 + interestRate, durationMonths / 12 * 26);
                     totalAmount = initialAmount * pow + frequentDeposit * ((pow - 1) / interestRate);
+                    totalContributions = (frequentDeposit * durationMonths / 12 * 26);
+                    totalInterest = totalAmount - totalContributions;
                 }
                 totalContributions = (frequentDeposit * durationMonths / 12 * 26);
-                totalInterest = totalAmount - totalContributions;
+
 
                 savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths / 12 * 26) + " Contributions");
 
@@ -154,6 +164,7 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
                 makeFieldsVisible();
                 break;
             case 3:
+                //Weekly
                 if(interestRate == 0){
                     totalAmount = initialAmount + frequentDeposit * (durationMonths / 12) * 52;
                 }else{
@@ -171,18 +182,20 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
                 savingsTotalInterestEarnedCalculatedTextView.setText("+$"+df.format(totalInterest));
                 savingsTotalCalculatedTextView.setText("$"+df.format(totalAmount));
                 makeFieldsVisible();
-                //Weekly
                 break;
             case 4:
                 //Daily
                 if(interestRate == 0){
                     totalAmount = initialAmount + frequentDeposit * (durationMonths / 12) * 365;
+                    totalInterest = 0;
                 }else{
                     double pow = Math.pow(1 + interestRate, durationMonths / 12 * 365);
                     totalAmount = initialAmount * pow + frequentDeposit * ((pow - 1) / interestRate);
+                    totalContributions = (frequentDeposit * durationMonths / 12 * 365);
+                    totalInterest = totalAmount - totalContributions;
                 }
                 totalContributions = (frequentDeposit * durationMonths / 12 * 365);
-                totalInterest = totalAmount - totalContributions;
+
 
                 savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths / 12 * 365) + " Contributions");
 

@@ -9,9 +9,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class LoanInfoDialog extends Dialog implements View.OnClickListener {
+public class LoanSaveDialog extends Dialog implements View.OnClickListener {
 
-    public interface LoanInfoDialogListener {
+    public interface LoanSaveDialogListener {
         void onSaveClicked(String title, String description);
     }
 
@@ -20,9 +20,9 @@ public class LoanInfoDialog extends Dialog implements View.OnClickListener {
     private EditText editTextDescription;
     private Button buttonSave;
     private Button buttonCancel;
-    private LoanInfoDialogListener mListener;
+    private LoanSaveDialogListener mListener;
 
-    public LoanInfoDialog(Context context) {
+    public LoanSaveDialog(Context context) {
         super(context);
     }
 
@@ -34,7 +34,7 @@ public class LoanInfoDialog extends Dialog implements View.OnClickListener {
         // Set the dialog window size
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        setContentView(R.layout.dialog_loan_info);
+        setContentView(R.layout.dialog_save_info);
 
         //Assigning variables
         editTextTitle = findViewById(R.id.edit_text_title);

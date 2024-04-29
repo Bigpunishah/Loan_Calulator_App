@@ -9,6 +9,6 @@ public class SavedSavingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.saved_savings);
+        setContentView(R.layout.saved_savings_listview);
     }
 }

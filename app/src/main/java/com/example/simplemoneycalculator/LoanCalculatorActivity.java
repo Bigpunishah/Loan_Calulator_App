@@ -15,7 +15,7 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 
 public class LoanCalculatorActivity extends AppCompatActivity implements
-        View.OnClickListener, LoanInfoDialog.LoanInfoDialogListener {
+        View.OnClickListener, LoanSaveDialog.LoanSaveDialogListener {
 
     //Create all variables that will be associated with the activity
     private EditText loanAmountEditText;
@@ -250,7 +250,7 @@ public class LoanCalculatorActivity extends AppCompatActivity implements
                 calculateAndDisplay();
                 //If the default value is there then it has not been calculated.
                 if(!paymentEveryRateTextView.getText().toString().equals("TextView")){
-                    LoanInfoDialog dialog = new LoanInfoDialog(LoanCalculatorActivity.this);
+                    LoanSaveDialog dialog = new LoanSaveDialog(LoanCalculatorActivity.this);
                     dialog.show();
                 }
                 return true;

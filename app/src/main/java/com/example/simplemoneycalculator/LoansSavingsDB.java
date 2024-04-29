@@ -15,21 +15,6 @@ public class LoansSavingsDB {
     public static final String DB_NAME = "loansaving.db";
     public static final int DB_VERSION = 1;
 
-    //List table for loan
-    public static final String LIST_TABLE = "list";
-
-    public static final String LIST_ID = "id";
-    public static final int LIST_ID_COL = 0;
-
-    public static final String LIST_TITLE = "list_title";
-    public static final int LIST_TITLE_COL = 1;
-
-    public static final String VALUE_TO_DISPLAY = "value_to_display";
-    public static final int VALUE_TO_DISPLAY_COL = 2;
-
-    public static final String ENTRY_TYPE = "entry_type";
-    public static final int ENTRY_TYPE_COL = 3;
-
     //Loan table contents
     public static final String LOAN_TABLE = "loan";
 
@@ -60,33 +45,30 @@ public class LoansSavingsDB {
     public static final String LOAN_PAYMENT = "loan_payments";
     public static final int LOAN_PAYMENTS_COL = 8;
 
+    public static final String LOAN_TOTAL_NUMBER_PAYMENTS = "loan_number_of_payments";
+    public static final int LOAN_TOTAL_NUMBER_PAYMENTS_COL = 9;
+
+
     public static final String LOAN_TOTAL_PAYBACK = "loan_total_payback";
-    public static final int LOAN_TOTAL_PAYBACK_COL = 9;
+    public static final int LOAN_TOTAL_PAYBACK_COL = 10;
 
     public static final String LOAN_TOTAL_INTEREST = "loan_total_interest";
-    public static final int LOAN_TOTAL_INTEREST_COL = 10;
-
-    public static final String CREATE_LIST_TABLE =
-            "CREATE TABLE " + LIST_TABLE + " (" + LIST_ID
-                    + " INTEGER PRIMARY KEY AUTOINCREMENT, " + LIST_TITLE
-                    + " TEXT NOT NULL UNIQUE, " + VALUE_TO_DISPLAY
-                    + " INTEGER NOT NULL, " + ENTRY_TYPE
-                    + " INTEGER NOT NULL);";
+    public static final int LOAN_TOTAL_INTEREST_COL = 11;
 
     public static final String CREATE_LOAN_TABLE =
             "CREATE TABLE " + LOAN_TABLE + " (" +
                     LOAN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     LOAN_LIST_ID + " INTEGER NOT NULL, " +
                     LOAN_TITLE + " TEXT NOT NULL, " +
-                    LOAN_DESCRIPTION + "TEXT, " +
+                    LOAN_DESCRIPTION + " TEXT, " +
                     LOAN_AMOUNT + " INTEGER NOT NULL, " +
                     LOAN_TERM_YEARS + " INTEGER NOT NULL, " +
                     LOAN_INTEREST_RATE + " INTEGER NOT NULL, " +
                     LOAN_PAY_RATE + " TEXT NOT NULL, " +
                     LOAN_PAYMENT + " INTEGER NOT NULL, " +
+                    LOAN_TOTAL_NUMBER_PAYMENTS + " INTEGER NOT NULL, " +
                     LOAN_TOTAL_PAYBACK + " INTEGER NOT NULL, " +
                     LOAN_TOTAL_INTEREST + " INTEGER NOT NULL);";
-
 
     //END OF LOAN SQL
 
@@ -96,7 +78,7 @@ public class LoansSavingsDB {
     public static final String SAVINGS_ID = "_id";
     public static final int SAVINGS_ID_COL = 0;
 
-    public static final String SAVINGS_LIST_ID = "_id";
+    public static final String SAVINGS_LIST_ID = "list_id";
     public static final int SAVINGS_LIST_ID_COL = 1;
 
     public static final String SAVINGS_TITLE = "savings_title";
@@ -147,7 +129,7 @@ public class LoansSavingsDB {
 
 //END SAVINGS SQL
 
-    public static String DROP_LIST_TABLE = "DROP TABLE IF EXISTS " + LIST_TABLE;
+//    public static String DROP_LIST_TABLE = "DROP TABLE IF EXISTS " + LIST_TABLE;
 
     public static String DROP_LOAN_TABLE = "DROP TABLE IF EXISTS " + LOAN_TABLE;
 
@@ -165,19 +147,18 @@ public class LoansSavingsDB {
         @Override
         public void onCreate(SQLiteDatabase db) {
             //create tables
-            db.execSQL(CREATE_LIST_TABLE);
+//            db.execSQL(CREATE_LIST_TABLE);
             db.execSQL(CREATE_LOAN_TABLE);
             db.execSQL(CREATE_SAVINGS_TABLE);
 
             //insert default lists
-            db.execSQL("INSERT INTO list VALUES (1, 'Loans', 100, 1)");
-            db.execSQL("INSERT INTO list VALUES (2, 'Savings', 25, 2);");
+            db.execSQL("INSERT INTO  loan VALUES (1, 1, 'car', 'for my future car', 10000, 5, 2.5, 'daily', 12, 25.12, 13535.23, 3535.23)");
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.d("Money DB", "Upgrading db from new version" + oldVersion + " to " + newVersion);
-            db.execSQL(LoansSavingsDB.DROP_LIST_TABLE);
+//            db.execSQL(LoansSavingsDB.DROP_LIST_TABLE);
             db.execSQL(LoansSavingsDB.DROP_LOAN_TABLE);
             db.execSQL(LoansSavingsDB.DROP_SAVINGS_TABLE);
 
@@ -219,14 +200,14 @@ public class LoansSavingsDB {
      */
 
     //Get list for loans
-    public ArrayList<List> getLoansList(){
+    public ArrayList<Loan> getLoans(){
         this.openReadableDB();
-        String where = ENTRY_TYPE + " = 1";
-        Cursor cursor = db.query(LIST_TABLE, null, where, null, null, null, null, null);
-        ArrayList<List> loansList = new ArrayList<>();
+        String where = LOAN_LIST_ID + " = 1";
+        Cursor cursor = db.query(LOAN_TABLE, null, where, null, null, null, null, null);
+        ArrayList<Loan> loansList = new ArrayList<>();
 
         while(cursor.moveToNext()){
-            loansList.add(getListFromCursor(cursor));
+            loansList.add(getLoanFromCursor(cursor));
         }
 
         if(cursor != null){
@@ -238,14 +219,14 @@ public class LoansSavingsDB {
     }
 
     //Get list for savings
-    public ArrayList<List> getSavingsList(){
+    public ArrayList<Savings> getSavings(){
         this.openReadableDB();
-        String where = ENTRY_TYPE + " = 2";
-        Cursor cursor = db.query(LIST_TABLE, null, where, null, null, null, null, null);
-        ArrayList<List> loansList = new ArrayList<>();
+        String where = SAVINGS_LIST_ID + " = 2";
+        Cursor cursor = db.query(SAVINGS_TABLE, null, where, null, null, null, null, null);
+        ArrayList<Savings> savingsList = new ArrayList<>();
 
         while(cursor.moveToNext()){
-            loansList.add(getListFromCursor(cursor));
+            savingsList.add(getSavingsFromCursor(cursor));
         }
 
         if(cursor != null){
@@ -253,34 +234,14 @@ public class LoansSavingsDB {
         }
 
         this.closeDB();
-        return loansList;
+        return savingsList;
     }
 
-    private static List getListFromCursor(Cursor cursor){
-        if(cursor == null || cursor.getCount() == 0){
-            return null;
-        }
-        else {
-            try{
-                List list = new List(
-                        cursor.getInt(LIST_ID_COL),
-                        cursor.getString(LIST_TITLE_COL),
-                        cursor.getDouble(VALUE_TO_DISPLAY_COL),
-                        cursor.getInt(ENTRY_TYPE_COL)
-                );
-                return list;
-            } catch (Exception e){
-                Log.e("Error from cursor", "MSG: " + e);
-                return null;
-            }
-        }
-    }
-
-    //Get loan from list query (When the user clicks on the value.
-    public Loan getLoanFromList(List list){
+    //Get loan from id.
+    public Loan getLoan(int id){
         this.openReadableDB();
-        String where = LOAN_TITLE + " = ? AND " + ENTRY_TYPE + " = ?";
-        String[] whereArgs = {list.getTitle(), "1"}; // where the titles match & correct entry type
+        String where =  LOAN_ID + " = ? ";
+        String[] whereArgs = {String.valueOf(id)}; // id matches the id
         Cursor cursor = db.query(LOAN_TABLE, null, where, whereArgs, null, null, null, null);
         cursor.moveToFirst();
         Loan loan = null;
@@ -314,6 +275,7 @@ public class LoansSavingsDB {
                         cursor.getDouble(LOAN_INTEREST_RATE_COL),
                         cursor.getString(LOAN_PAY_RATE_COL),
                         cursor.getDouble(LOAN_PAYMENTS_COL),
+                        cursor.getDouble(LOAN_TOTAL_NUMBER_PAYMENTS_COL),
                         cursor.getDouble(LOAN_TOTAL_PAYBACK_COL),
                         cursor.getDouble(LOAN_TOTAL_INTEREST_COL)
 
@@ -327,12 +289,12 @@ public class LoansSavingsDB {
     }
 
     //Inserting loan
-    public void insertLoanAndList(Loan loan){
+    public void insertLoan(Loan loan){
 
         ContentValues cv = new ContentValues();
         //Insert into loans table
         cv.put(LOAN_ID, loan.getLoanId());
-        cv.put(LOAN_LIST_ID, loan.getListId()); //sets the entry type also known as LOAN_LIST_ID or SAVINGS_LIST_ID
+        cv.put(LOAN_LIST_ID, 1); //sets the entry type also known as LOAN_LIST_ID or SAVINGS_LIST_ID
         cv.put(LOAN_TITLE, loan.getTitle());
         cv.put(LOAN_DESCRIPTION, loan.getDescription());
         cv.put(LOAN_AMOUNT, loan.getLoanAmount());
@@ -340,13 +302,9 @@ public class LoansSavingsDB {
         cv.put(LOAN_INTEREST_RATE, loan.getInterestRate());
         cv.put(LOAN_PAY_RATE, loan.getPayRate());
         cv.put(LOAN_PAYMENT, loan.getPayments());
+        cv.put(LOAN_TOTAL_NUMBER_PAYMENTS, loan.getNumberOfPayments());
         cv.put(LOAN_TOTAL_PAYBACK, loan.getTotalPayback());
         cv.put(LOAN_TOTAL_INTEREST, loan.getTotalInterest());
-
-        //put into list table
-        cv.put(LIST_TITLE, loan.getTitle());
-        cv.put(VALUE_TO_DISPLAY, loan.getLoanAmount()); //the value to display will be loan amount
-        cv.put(ENTRY_TYPE, 1); //1 = loan type entry
 
         this.openWritableDB();
         this.closeDB();
@@ -355,10 +313,10 @@ public class LoansSavingsDB {
 
 
     //Savings main queries
-    public Savings getSavingsFromList(List list){
+    public Savings getSavings(int id){
         this.openReadableDB();
-        String where = SAVINGS_TITLE + " = ? AND " + ENTRY_TYPE + " = ?";
-        String whereArgs[] = {list.getTitle(), "2"}; //title matches & entry type is correct
+        String where = SAVINGS_ID + " = ?";
+        String whereArgs[] = {String.valueOf(id)}; //title matches & entry type is correct
         Cursor cursor = db.query(SAVINGS_TABLE, null, where, whereArgs, null, null, null, null);
         cursor.moveToFirst();
         Savings savings = null;
@@ -404,7 +362,6 @@ public class LoansSavingsDB {
         }
     }
 
-
     public void insertSavingsAndList(Savings savings){
 
         ContentValues cv = new ContentValues();
@@ -421,11 +378,6 @@ public class LoansSavingsDB {
         cv.put(SAVINGS_TOTAL_CONTRIBUTIONS, savings.getTotalContributions());
         cv.put(SAVINGS_TOTAL_INTEREST, savings.getTotalInterest());
         cv.put(SAVINGS_TOTAL_AMT, savings.getTotalAmount());
-
-        //Save into list table
-        cv.put(LIST_TITLE, savings.getTitle());
-        cv.put(VALUE_TO_DISPLAY, savings.getDepositAmount());
-        cv.put(ENTRY_TYPE, 2); // 2 = savings
 
         this.openWritableDB();
         this.closeDB();
