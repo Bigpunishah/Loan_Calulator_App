@@ -26,7 +26,7 @@ Saving Calculations:
 Save your loan or savings calculations for future reference.
 View your recent calculations within the app.
 Compatibility
-This app is compatible with Android devices running Android OS version X.X and above.
+This app is compatible with Android devices running Android OS version 33 and above.
 
 Feedback
 We welcome any feedback or suggestions for improving the Loan and Savings Calculator app. If you encounter any issues or have ideas for new features, please don't hesitate to reach out to us.
