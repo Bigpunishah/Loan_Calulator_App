@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -31,21 +30,21 @@ public class SavedLoansActivity extends AppCompatActivity implements AdapterView
         loansListView.setAdapter(loanAdapter);
         loansListView.setOnItemClickListener(this);
 
-
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        db = new LoansSavingsDB(this);
-        ArrayList<Loan> loans = db.getLoans();
-        Loan selectedLoan = loans.get(position);
+        // Get the selected loan from the adapter
+        Loan selectedLoan = (Loan) loanAdapter.getItem(position);
 
-        SelectedLoanDialog dialog = new SelectedLoanDialog(this, selectedLoan);
+        // Pass the selected loan to the dialog
+        LoanSelectedDialog dialog = new LoanSelectedDialog(this, selectedLoan);
         dialog.show();
     }
 
-    //Refreshes the list & used on LoanSavedDialog.class
-    public void refreshLoanList() {
+
+    //Refreshes the list
+    private void refreshLoanList() {
         // Clear the existing list of loans
         loanAdapter.clear();
 
@@ -59,6 +58,7 @@ public class SavedLoansActivity extends AppCompatActivity implements AdapterView
         loanAdapter.notifyDataSetChanged();
     }
 
+    //On resume refresh the list.
     @Override
     protected void onResume() {
         super.onResume();

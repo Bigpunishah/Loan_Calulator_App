@@ -1,27 +1,30 @@
 package com.example.simplemoneycalculator;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 //This adapter is what sets up the list view for the saved values
-public class LoanAdapter extends ArrayAdapter<Loan>  {
+public class SavingsAdapter extends ArrayAdapter<Savings> {
     private TextView titleTextView;
     private TextView valueTextView;
 
-    private ArrayList<Loan> loans;
     private Context context;
-    //This file is for the single item .xml layout that will be populated for the listview
-    public LoanAdapter(Context context, int resource, ArrayList<Loan> loans) {
-        super(context, resource, loans);
+    private ArrayList<Savings> savings;
+
+    public SavingsAdapter(Context context, int resource, ArrayList<Savings> savings) {
+        super(context, resource, savings);
         this.context = context;
-        this.loans = loans;
+        this.savings = savings;
     }
 
     @Override
@@ -30,23 +33,22 @@ public class LoanAdapter extends ArrayAdapter<Loan>  {
             convertView = LayoutInflater.from(context).inflate(R.layout.single_item, parent, false);
         }
 
-        // Get the loan object for this position
-        Loan loan = loans.get(position);
+        //Get the saving object for this position
+        Savings saving = savings.get(position);
 
-        // Find TextViews in list item layout
+        //Find TextViews in list item layout
         titleTextView = convertView.findViewById(R.id.titleTextView);
         valueTextView = convertView.findViewById(R.id.valueTextView);
 
-        // Set loan data to TextViews
-        if(loan.getTitle() == null){
-            titleTextView.setText("No Loans saved");
+        // Set saving data to TextViews
+        if(saving.getTitle() == null){
+            titleTextView.setText("No Savings saved");
             valueTextView.setText("Go save one from the Loan Calculator");
         } else {
-            titleTextView.setText("Loan Title: " + loan.getTitle());
-            valueTextView.setText("Loan Amount: $" + loan.getLoanAmount());
+            titleTextView.setText("Title: " + saving.getTitle());
+            valueTextView.setText("Deposit Amount: $" + saving.getDepositAmount());
         }
+
         return convertView;
     }
-
-
 }

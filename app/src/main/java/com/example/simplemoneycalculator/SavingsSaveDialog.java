@@ -1,18 +1,19 @@
 package com.example.simplemoneycalculator;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class LoanSaveDialog extends Dialog implements View.OnClickListener {
+public class SavingsSaveDialog extends Dialog implements View.OnClickListener {
 
     //Creating variables for dialog
     private EditText editTextTitle;
@@ -20,16 +21,16 @@ public class LoanSaveDialog extends Dialog implements View.OnClickListener {
     private Button buttonSave;
     private Button buttonCancel;
 
-    private Loan loan;
+    private Savings saving;
     private LoansSavingsDB db;
     private Context context;
 
 
-    public LoanSaveDialog(Context context, LoansSavingsDB db, Loan loan) {
+    public SavingsSaveDialog(Context context, LoansSavingsDB db, Savings saving) {
         super(context);
         this.db = db;
         this.context = context;
-        this.loan = loan;
+        this.saving = saving;
     }
 
     @Override
@@ -57,7 +58,7 @@ public class LoanSaveDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_save:
-                saveLoan();
+                saveSavings();
                 dismiss();
                 break;
             case R.id.button_cancel:
@@ -68,12 +69,12 @@ public class LoanSaveDialog extends Dialog implements View.OnClickListener {
         }
     }
 
-    private void saveLoan(){
+    private void saveSavings(){
         //Grabs the title & description from dialog then saves
-        loan.setTitle(editTextTitle.getText().toString().trim());
-        loan.setDescription(editTextDescription.getText().toString().trim());
-        db.insertLoan(loan);
-        Toast.makeText(context, "Your Loan has been saved!", Toast.LENGTH_SHORT).show();
+        saving.setTitle(editTextTitle.getText().toString().trim());
+        saving.setDescription(editTextDescription.getText().toString().trim());
+        db.insertSavings(saving);
+        Toast.makeText(context, "Your Savings has been saved!", Toast.LENGTH_SHORT).show();
         dismiss();
     }
 }

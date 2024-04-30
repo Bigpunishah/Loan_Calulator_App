@@ -2,12 +2,14 @@ package com.example.simplemoneycalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -85,9 +87,10 @@ public class LoanCalculatorActivity extends AppCompatActivity implements
         double totalInterest;
         double totalPayback;
 
-        //Hide keyboard
-//        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-//        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        // Obtain the input method manager
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        // Hide the keyboard
+        imm.hideSoftInputFromWindow(payRateSpinner.getWindowToken(), 0);
 
         //Formula for monthly loan payments:
         //Interest rate is divided by 100 to turn whole number into percent value
@@ -281,11 +284,10 @@ public class LoanCalculatorActivity extends AppCompatActivity implements
             return null;
         }
 
-        String loanTermMonthsStr = loanTermMonthsEditText.getText().toString();
-        if (TextUtils.isEmpty(loanTermMonthsStr)) {
-            // Handle empty input
-            return null;
-        }
+        double years = loanTermYearsEditText.getText().toString().isEmpty() ? 0 : Double.parseDouble(loanTermYearsEditText.getText().toString());
+        double months = loanTermMonthsEditText.getText().toString().isEmpty() ? 0 : Double.parseDouble(loanTermMonthsEditText.getText().toString());
+        // Combining years & months to create a total of months
+        Double loanTermInYears = years + (months / 12);
 
         String interestRateStr = interestRateEditText.getText().toString();
         if (TextUtils.isEmpty(interestRateStr)) {
@@ -314,7 +316,6 @@ public class LoanCalculatorActivity extends AppCompatActivity implements
         try {
             // Parse input values
             double loanAmount = Double.parseDouble(loanAmountStr);
-            double loanTermMonths = Double.parseDouble(loanTermMonthsStr);
             double interestRate = Double.parseDouble(interestRateStr);
             double paymentEveryRate = Double.parseDouble(paymentEveryRateStr);
             double totalPayments = Double.parseDouble(totalPaymentsStr);
@@ -323,7 +324,7 @@ public class LoanCalculatorActivity extends AppCompatActivity implements
             // Set values to loan object
             loan.setLoanId(1);
             loan.setLoanAmount(loanAmount);
-            loan.setLoanTermInYears(loanTermMonths / 12); // divide by 12 because they are in months
+            loan.setLoanTermInYears(loanTermInYears);
             loan.setInterestRate(interestRate);
             loan.setPayRate(payRateSpinner.getSelectedItem().toString());
             loan.setPayments(paymentEveryRate);

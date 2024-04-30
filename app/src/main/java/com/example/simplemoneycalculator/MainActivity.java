@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button loanCalculatorButton;
     private Button savingCalculatorButton;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,18 +47,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
-
-
-
     //Access Menu Items Information
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         //Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.activity_menu, menu);
         //Fin the menu items by ID
-        MenuItem savedLoansMenuItem = (MenuItem) menu.findItem(R.id.savedLoansMenuItem);
-        MenuItem savedSavingsMenuItem = (MenuItem) menu.findItem(R.id.savedSavingsMenuItem);
+//        MenuItem savedLoansMenuItem = (MenuItem) menu.findItem(R.id.savedLoansMenuItem);
+//        MenuItem savedSavingsMenuItem = (MenuItem) menu.findItem(R.id.savedSavingsMenuItem);
         return true;
     }
 

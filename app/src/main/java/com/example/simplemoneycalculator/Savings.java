@@ -10,12 +10,27 @@ public class Savings {
     private double depositAmount;
     private double duration;
     private double interest;
+    private double numberOfContributions;
     private double totalContributions;
     private double totalInterest;
     private double totalAmount;
 
+    public Savings(){
+        title = "";
+        description = "";
+        initialAmount = 0;
+        depositFrequency = "";
+        depositAmount = 0;
+        duration = 0;
+        interest  = 0;
+        numberOfContributions = 0;
+        totalContributions = 0;
+        totalInterest = 0;
+        totalAmount = 0;
+    }
 
-    public Savings(int listId, String title, String description, double initialAmount, String depositFrequency, double depositAmount, double duration, double interest, double totalContributions, double totalInterest, double totalAmount){
+
+    public Savings(int listId, String title, String description, double initialAmount, String depositFrequency, double depositAmount, double duration, double interest,double numberOfContributions, double totalContributions, double totalInterest, double totalAmount){
         this.listId = listId;
         this.title = title;
         this.description = description;
@@ -24,12 +39,13 @@ public class Savings {
         this.depositAmount = depositAmount;
         this.duration = duration;
         this.interest = interest;
+        this.numberOfContributions = numberOfContributions;
         this.totalContributions = totalContributions;
         this.totalInterest = totalInterest;
         this.totalAmount = totalAmount;
     }
 
-    public Savings(int listId, int savingsId, String title, String description, double initialAmount, String depositFrequency, double depositAmount, double duration, double interest, double totalContributions, double totalInterest, double totalAmount){
+    public Savings(int listId, int savingsId, String title, String description, double initialAmount, String depositFrequency, double depositAmount, double duration, double interest,double numberOfContributions, double totalContributions, double totalInterest, double totalAmount){
         this.listId = listId;
         this.savingsId = savingsId;
         this.title = title;
@@ -39,6 +55,7 @@ public class Savings {
         this.depositAmount = depositAmount;
         this.duration = duration;
         this.interest = interest;
+        this.numberOfContributions = numberOfContributions;
         this.totalContributions = totalContributions;
         this.totalInterest = totalInterest;
         this.totalAmount = totalAmount;
@@ -138,5 +155,13 @@ public class Savings {
 
     public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public double getNumberOfContributions() {
+        return numberOfContributions;
+    }
+
+    public void setNumberOfContributions(double numberOfContributions) {
+        this.numberOfContributions = numberOfContributions;
     }
 }

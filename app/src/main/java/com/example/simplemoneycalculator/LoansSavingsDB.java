@@ -102,14 +102,17 @@ public class LoansSavingsDB {
     public static final String SAVINGS_INTEREST = "savings_interest";
     public static final int SAVINGS_INTEREST_COL = 8;
 
+    public static final String SAVINGS_NUMBER_OF_CONTRIBUTIONS = "number_contributions";
+    public static final int SAVINGS_NUMBER_OF_CONTRIBUTIONS_COL = 9;
+
     public static final String SAVINGS_TOTAL_CONTRIBUTIONS = "savings_total_contributions";
-    public static final int SAVINGS_TOTAL_CONTRIBUTIONS_COL = 9;
+    public static final int SAVINGS_TOTAL_CONTRIBUTIONS_COL = 10;
 
     public static final String SAVINGS_TOTAL_INTEREST = "savings_total_interest";
-    public static final int SAVINGS_TOTAL_INTEREST_COL = 10;
+    public static final int SAVINGS_TOTAL_INTEREST_COL = 11;
 
     public static final String SAVINGS_TOTAL_AMT = "savings_total_amt";
-    public static final int SAVINGS_TOTAL_AMT_COL = 11;
+    public static final int SAVINGS_TOTAL_AMT_COL = 12;
 
     //create & drop table statements
     public static final String CREATE_SAVINGS_TABLE =
@@ -123,6 +126,7 @@ public class LoansSavingsDB {
                     SAVINGS_DEPOSIT_AMT + " INTEGER NOT NULL, " +
                     SAVINGS_DURATION_MONTHS + " TEXT NOT NULL, " +
                     SAVINGS_INTEREST + " INTEGER NOT NULL, " +
+                    SAVINGS_NUMBER_OF_CONTRIBUTIONS + " INTEGER NOT NULL, " +
                     SAVINGS_TOTAL_CONTRIBUTIONS + " INTEGER NOT NULL, " +
                     SAVINGS_TOTAL_INTEREST + " INTEGER NOT NULL, " +
                     SAVINGS_TOTAL_AMT + " INTEGER NOT NULL);";
@@ -155,6 +159,7 @@ public class LoansSavingsDB {
             //db.execSQL("INSERT INTO  loan VALUES (1, 1, 'car', 'for my future car', 10000, 5, 2.5, 'daily', 12, 25.12, 13535.23, 3535.23)");
 //            db.execSQL("INSERT INTO  loan VALUES (2, 1, 'mortgage', 'craxy stuff', 3500, 12, 9.3, 'Monthly', 10, 35, 5600, 3535.23)");
 //            db.execSQL("INSERT INTO  loan VALUES (3, 1, 'car', 'for my future car', 10000, 5, 2.5, 'daily', 12, 25.12, 13535.23, 3535.23)");
+            //db.execSQL("INSERT INTO savings VALUES (1, 2, 'save for car', 'i want a new car', 100, 'Daily', '10', 12, 0, 365, 0, 465, 465)");
 
         }
 
@@ -354,6 +359,7 @@ public class LoansSavingsDB {
                         cursor.getDouble(SAVINGS_DEPOSIT_AMT_COL),
                         cursor.getDouble(SAVINGS_DURATION_MONTHS_COL),
                         cursor.getDouble(SAVINGS_INTEREST_COL),
+                        cursor.getDouble(SAVINGS_NUMBER_OF_CONTRIBUTIONS_COL),
                         cursor.getDouble(SAVINGS_TOTAL_CONTRIBUTIONS_COL),
                         cursor.getDouble(SAVINGS_TOTAL_INTEREST_COL),
                         cursor.getDouble(SAVINGS_TOTAL_AMT_COL)
@@ -366,7 +372,7 @@ public class LoansSavingsDB {
         }
     }
 
-    public void insertSavingsAndList(Savings savings){
+    public void insertSavings(Savings savings){
 
         ContentValues cv = new ContentValues();
         //Save into savings table
@@ -379,6 +385,7 @@ public class LoansSavingsDB {
         cv.put(SAVINGS_DEPOSIT_AMT, savings.getDepositAmount());
         cv.put(SAVINGS_DURATION_MONTHS, savings.getDuration());
         cv.put(SAVINGS_INTEREST, savings.getInterest());
+        cv.put(SAVINGS_NUMBER_OF_CONTRIBUTIONS, savings.getNumberOfContributions());
         cv.put(SAVINGS_TOTAL_CONTRIBUTIONS, savings.getTotalContributions());
         cv.put(SAVINGS_TOTAL_INTEREST, savings.getTotalInterest());
         cv.put(SAVINGS_TOTAL_AMT, savings.getTotalAmount());

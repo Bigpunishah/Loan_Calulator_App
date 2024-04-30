@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
-public class SelectedLoanDialog extends Dialog {
+public class LoanSelectedDialog extends Dialog {
 
     //Create variables
     private TextView selectedLoanTitleTextView;
@@ -25,7 +25,7 @@ public class SelectedLoanDialog extends Dialog {
 
 
     //Create the dialog with the layout
-    public SelectedLoanDialog(Context context, Loan loan) {
+    public LoanSelectedDialog(Context context, Loan loan) {
         super(context);
         selectedLoan = loan;
         setContentView(R.layout.dialog_selected_loan);
