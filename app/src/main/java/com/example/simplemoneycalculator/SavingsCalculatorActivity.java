@@ -32,6 +32,8 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
 
     //Label TextViews
     private TextView savingsInitialCalculatedAmountTextView;
+    private TextView savingsYearlyDepositTextView;
+    private TextView savingsYearlyInterestTextView;
     //"Total of .. Contributions
     private TextView savingsTotalContributionsTextView;
     private TextView savingsTotalInterestEarnedTextView;
@@ -61,6 +63,8 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
         savingsCalculateSavingsButton = (Button) findViewById(R.id.savingsCalculateSavingsButton);
 
         //Label TextViews
+        savingsYearlyDepositTextView = (TextView) findViewById(R.id.savingsYearlyDepositTextView);
+        savingsYearlyInterestTextView = (TextView) findViewById(R.id.savingsYearlyInterestTextView);
         savingsInitialCalculatedAmountTextView = (TextView) findViewById(R.id.savingsInitialCalculatedAmountTextView);
         savingsTotalContributionsTextView = (TextView) findViewById(R.id.savingsTotalContributionsTextView);
         savingsTotalInterestEarnedTextView = (TextView) findViewById(R.id.savingsTotalInterestEarnedTextView);
@@ -70,7 +74,6 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
         savingsTotalContributionsCalculatedTextView = (TextView) findViewById(R.id.savingsTotalContributionsCalculatedTextView);
         savingsTotalInterestEarnedCalculatedTextView = (TextView) findViewById(R.id.savingsTotalInterestEarnedCalculatedTextView);
         savingsTotalCalculatedTextView = (TextView) findViewById(R.id.savingsTotalCalculatedTextView);
-
         savingsCalculateSavingsButton.setOnClickListener(this);
 
         //Scroll view reference
@@ -120,6 +123,9 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
                 }
                 totalContributions = (frequentDeposit * (durationMonths / 12));
 
+                savingsYearlyDepositTextView.setText("Yearly Deposit:");
+                savingsYearlyInterestTextView.setText("Yearly Interest:");
+
                 savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths/12) + " Contributions");
 
 
@@ -140,6 +146,9 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
                     totalInterest = totalAmount - totalContributions;
                 }
                 totalContributions = (frequentDeposit * durationMonths);
+
+                savingsYearlyDepositTextView.setText("Monthly Deposit:");
+                savingsYearlyInterestTextView.setText("Monthly Interest:");
 
                 savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths) + " Contributions");
 
@@ -164,8 +173,10 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
                 }
                 totalContributions = (frequentDeposit * durationMonths / 12 * 26);
 
-                savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths / 12 * 26) + " Contributions");
+                savingsYearlyDepositTextView.setText("Bi-Weekly Deposit:");
+                savingsYearlyInterestTextView.setText("Bi-Weekly Interest:");
 
+                savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths / 12 * 26) + " Contributions");
 
                 savingsInitialAmountCalculatedTextView.setText("$"+initialAmount);
                 savingsTotalContributionsCalculatedTextView.setText("+$"+df.format(totalContributions));
@@ -183,6 +194,9 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
                 }
                 totalContributions = (frequentDeposit * durationMonths / 12 * 52);
                 totalInterest = totalAmount - totalContributions;
+
+                savingsYearlyDepositTextView.setText("Weekly Deposit:");
+                savingsYearlyInterestTextView.setText("Weekly Interest:");
 
                 savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths / 12 * 52) + " Contributions");
 
@@ -205,6 +219,8 @@ public class SavingsCalculatorActivity extends AppCompatActivity implements View
                 }
                 totalContributions = (frequentDeposit * durationMonths / 12 * 365);
 
+                savingsYearlyDepositTextView.setText("Daily Deposit:");
+                savingsYearlyInterestTextView.setText("Daily Interest:");
 
                 savingsTotalContributionsTextView.setText("Total of " +df.format(durationMonths / 12 * 365) + " Contributions");
 
