@@ -20,6 +20,7 @@ public class SelectedLoanDialog extends Dialog {
     private TextView selectedLoanTotalNumberOfPaymentsTextView;
     private TextView selectedLoanTotalPayTextView;
     private TextView selectedLoanTotalInterestTextView;
+    private TextView payRateTextLabelTextView;
     private Loan selectedLoan;
 
 
@@ -45,15 +46,19 @@ public class SelectedLoanDialog extends Dialog {
         selectedLoanTotalPayTextView = (TextView) findViewById(R.id.selectedLoanTotalPayTextView);
         selectedLoanTotalInterestTextView = (TextView) findViewById(R.id.selectedLoanTotalInterestTextView);
 
+        payRateTextLabelTextView = (TextView) findViewById(R.id.payRateTextLabelTextView);
+        //Setting the pay rate frequency text view.
+        payRateTextLabelTextView.setText(selectedLoan.getPayRate() + " Payment of:");
+
         selectedLoanTitleTextView.setText(selectedLoan.getTitle());
         selectedLoanDescriptionTextView.setText(selectedLoan.getDescription());
-        selectedLoanAmountTextView.setText(df.format(selectedLoan.getLoanAmount()));
+        selectedLoanAmountTextView.setText("$" + df.format(selectedLoan.getLoanAmount()));
         selectedLoanTermTextView.setText(df.format(selectedLoan.getLoanTermInYears()) + " Years");
-        selectedLoanInterestTextView.setText(df.format(selectedLoan.getInterestRate()));
+        selectedLoanInterestTextView.setText(df.format(selectedLoan.getInterestRate()) + "%");
         selectedLoanPaymentsTextView.setText(df.format(selectedLoan.getPayments()));
         selectedLoanPayRateTextView.setText(selectedLoan.getPayRate());
-        selectedLoanTotalNumberOfPaymentsTextView.setText(df.format(selectedLoan.getNumberOfPayments()));
-        selectedLoanTotalPayTextView.setText(df.format(selectedLoan.getTotalPayback()));
-        selectedLoanTotalInterestTextView.setText(df.format(selectedLoan.getTotalInterest()));
+        selectedLoanTotalNumberOfPaymentsTextView.setText("$" + df.format(selectedLoan.getNumberOfPayments()));
+        selectedLoanTotalPayTextView.setText("$" + df.format(selectedLoan.getTotalPayback()));
+        selectedLoanTotalInterestTextView.setText("$" + df.format(selectedLoan.getTotalInterest()));
     }
 }

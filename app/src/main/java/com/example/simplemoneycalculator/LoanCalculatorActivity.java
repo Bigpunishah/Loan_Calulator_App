@@ -3,6 +3,8 @@ package com.example.simplemoneycalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +17,7 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 
 public class LoanCalculatorActivity extends AppCompatActivity implements
-        View.OnClickListener, LoanSaveDialog.LoanSaveDialogListener {
+        View.OnClickListener {
 
     //Create all variables that will be associated with the activity
     private EditText loanAmountEditText;
@@ -33,7 +35,7 @@ public class LoanCalculatorActivity extends AppCompatActivity implements
     private TextView totalPaymentsTextView;
     private TextView totalInterestTextView;
 
-
+    private LoansSavingsDB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,8 @@ public class LoanCalculatorActivity extends AppCompatActivity implements
         totalInterestTextView = (TextView) findViewById(R.id.totalInterestTextView);
 
         calculateLoanButton.setOnClickListener(this);
+
+        db = new LoansSavingsDB(this);
     }
 
     //Correct way to use onClickListener
@@ -250,7 +254,10 @@ public class LoanCalculatorActivity extends AppCompatActivity implements
                 calculateAndDisplay();
                 //If the default value is there then it has not been calculated.
                 if(!paymentEveryRateTextView.getText().toString().equals("TextView")){
-                    LoanSaveDialog dialog = new LoanSaveDialog(LoanCalculatorActivity.this);
+                    //Dialog handles the save process for the DB
+                    Loan loanToSend = loanToSendToDialog();
+                    LoanSaveDialog dialog = new LoanSaveDialog(LoanCalculatorActivity.this, db, loanToSend);
+//                    db.insertLoan(dialog.saveLoan());
                     dialog.show();
                 }
                 return true;
@@ -264,9 +271,72 @@ public class LoanCalculatorActivity extends AppCompatActivity implements
         }
     }
 
+    private Loan loanToSendToDialog() {
+        Loan loan = new Loan();
 
-    @Override
-    public void onSaveClicked(String title, String description) {
+        // Input validation
+        String loanAmountStr = loanAmountEditText.getText().toString();
+        if (TextUtils.isEmpty(loanAmountStr)) {
+            // Handle empty input
+            return null;
+        }
 
+        String loanTermMonthsStr = loanTermMonthsEditText.getText().toString();
+        if (TextUtils.isEmpty(loanTermMonthsStr)) {
+            // Handle empty input
+            return null;
+        }
+
+        String interestRateStr = interestRateEditText.getText().toString();
+        if (TextUtils.isEmpty(interestRateStr)) {
+            // Handle empty input
+            return null;
+        }
+
+        String paymentEveryRateStr = paymentEveryRateTextView.getText().toString().replace("$", "");
+        if (TextUtils.isEmpty(paymentEveryRateStr)) {
+            // Handle empty input
+            return null;
+        }
+
+        String totalPaymentsStr = totalPaymentsTextView.getText().toString().replace("$", "");
+        if (TextUtils.isEmpty(totalPaymentsStr)) {
+            // Handle empty input
+            return null;
+        }
+
+        String totalInterestStr = totalInterestTextView.getText().toString().replace("$", "");
+        if (TextUtils.isEmpty(totalInterestStr)) {
+            // Handle empty input
+            return null;
+        }
+
+        try {
+            // Parse input values
+            double loanAmount = Double.parseDouble(loanAmountStr);
+            double loanTermMonths = Double.parseDouble(loanTermMonthsStr);
+            double interestRate = Double.parseDouble(interestRateStr);
+            double paymentEveryRate = Double.parseDouble(paymentEveryRateStr);
+            double totalPayments = Double.parseDouble(totalPaymentsStr);
+            double totalInterest = Double.parseDouble(totalInterestStr);
+
+            // Set values to loan object
+            loan.setLoanId(1);
+            loan.setLoanAmount(loanAmount);
+            loan.setLoanTermInYears(loanTermMonths / 12); // divide by 12 because they are in months
+            loan.setInterestRate(interestRate);
+            loan.setPayRate(payRateSpinner.getSelectedItem().toString());
+            loan.setPayments(paymentEveryRate);
+            loan.setNumberOfPayments(paymentEveryRate);
+            loan.setTotalPayback(totalPayments);
+            loan.setTotalInterest(totalInterest);
+        } catch (NumberFormatException e) {
+            // Handle invalid input format
+            Log.e("Error: ",e.toString());
+            return null;
+        }
+
+        return loan;
     }
+
 }

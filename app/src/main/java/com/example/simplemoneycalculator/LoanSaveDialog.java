@@ -8,22 +8,28 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoanSaveDialog extends Dialog implements View.OnClickListener {
 
-    public interface LoanSaveDialogListener {
-        void onSaveClicked(String title, String description);
-    }
-
-    //Creating variables
+    //Creating variables for dialog
     private EditText editTextTitle;
     private EditText editTextDescription;
     private Button buttonSave;
     private Button buttonCancel;
-    private LoanSaveDialogListener mListener;
 
-    public LoanSaveDialog(Context context) {
+    private Loan loan;
+    private LoansSavingsDB db;
+    private Context context;
+
+
+    public LoanSaveDialog(Context context, LoansSavingsDB db, Loan loan) {
         super(context);
+        this.db = db;
+        this.context = context;
+        this.loan = loan;
     }
 
     @Override
@@ -36,12 +42,15 @@ public class LoanSaveDialog extends Dialog implements View.OnClickListener {
 
         setContentView(R.layout.dialog_save_info);
 
-        //Assigning variables
+        //Assigning variables for dialog
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextDescription = findViewById(R.id.edit_text_description);
         buttonSave = findViewById(R.id.button_save);
         buttonCancel = findViewById(R.id.button_cancel);
 
+
+
+        //on click listener for buttons
         buttonSave.setOnClickListener(this);
         buttonCancel.setOnClickListener(this);
     }
@@ -50,9 +59,8 @@ public class LoanSaveDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_save:
-                String title = editTextTitle.getText().toString().trim();
-                String description = editTextDescription.getText().toString().trim();
-                mListener.onSaveClicked(title, description);
+                saveLoan();
+
                 dismiss();
                 break;
             case R.id.button_cancel:
@@ -61,5 +69,14 @@ public class LoanSaveDialog extends Dialog implements View.OnClickListener {
             default:
                 break;
         }
+    }
+
+    private void saveLoan(){
+        //Grabs the title & description from dialog then saves
+        loan.setTitle(editTextTitle.getText().toString().trim());
+        loan.setDescription(editTextDescription.getText().toString().trim());
+        db.insertLoan(loan);
+        Toast.makeText(context, "Your Loan has been saved!", Toast.LENGTH_SHORT).show();
+        dismiss();
     }
 }

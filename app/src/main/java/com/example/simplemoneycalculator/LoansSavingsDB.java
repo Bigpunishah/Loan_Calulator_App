@@ -152,7 +152,10 @@ public class LoansSavingsDB {
             db.execSQL(CREATE_SAVINGS_TABLE);
 
             //insert default lists
-            db.execSQL("INSERT INTO  loan VALUES (1, 1, 'car', 'for my future car', 10000, 5, 2.5, 'daily', 12, 25.12, 13535.23, 3535.23)");
+            //db.execSQL("INSERT INTO  loan VALUES (1, 1, 'car', 'for my future car', 10000, 5, 2.5, 'daily', 12, 25.12, 13535.23, 3535.23)");
+//            db.execSQL("INSERT INTO  loan VALUES (2, 1, 'mortgage', 'craxy stuff', 3500, 12, 9.3, 'Monthly', 10, 35, 5600, 3535.23)");
+//            db.execSQL("INSERT INTO  loan VALUES (3, 1, 'car', 'for my future car', 10000, 5, 2.5, 'daily', 12, 25.12, 13535.23, 3535.23)");
+
         }
 
         @Override
@@ -293,8 +296,8 @@ public class LoansSavingsDB {
 
         ContentValues cv = new ContentValues();
         //Insert into loans table
-        cv.put(LOAN_ID, loan.getLoanId());
-        cv.put(LOAN_LIST_ID, 1); //sets the entry type also known as LOAN_LIST_ID or SAVINGS_LIST_ID
+        //cv.put(LOAN_ID, loan.getLoanId()); //auto increment so i dont think we need.
+        cv.put(LOAN_LIST_ID, loan.getLoanId()); //sets the entry type also known as LOAN_LIST_ID or SAVINGS_LIST_ID
         cv.put(LOAN_TITLE, loan.getTitle());
         cv.put(LOAN_DESCRIPTION, loan.getDescription());
         cv.put(LOAN_AMOUNT, loan.getLoanAmount());
@@ -307,6 +310,7 @@ public class LoansSavingsDB {
         cv.put(LOAN_TOTAL_INTEREST, loan.getTotalInterest());
 
         this.openWritableDB();
+        db.insert(LOAN_TABLE, null, cv);
         this.closeDB();
     }
     //End of Loan main queries
@@ -366,7 +370,7 @@ public class LoansSavingsDB {
 
         ContentValues cv = new ContentValues();
         //Save into savings table
-        cv.put(SAVINGS_ID, savings.getSavingsId());
+        //cv.put(SAVINGS_ID, savings.getSavingsId());
         cv.put(SAVINGS_LIST_ID, savings.getListId());
         cv.put(SAVINGS_TITLE, savings.getTitle());
         cv.put(SAVINGS_DESCRIPTION, savings.getDescription());
@@ -380,6 +384,7 @@ public class LoansSavingsDB {
         cv.put(SAVINGS_TOTAL_AMT, savings.getTotalAmount());
 
         this.openWritableDB();
+        db.insert(SAVINGS_TABLE, null, cv);
         this.closeDB();
     }
 

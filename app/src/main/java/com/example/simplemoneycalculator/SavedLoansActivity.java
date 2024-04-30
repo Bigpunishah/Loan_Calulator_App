@@ -16,18 +16,6 @@ public class SavedLoansActivity extends AppCompatActivity implements AdapterView
     private LoansSavingsDB db;
     private LoanAdapter loanAdapter;
 
-    private TextView selectedLoanTitleTextView;
-    private TextView selectedLoanDescriptionTextView;
-    private TextView selectedLoanAmountTextView;
-    private TextView selectedLoanTermTextView;
-    private TextView selectedLoanInterestTextView;
-    private TextView selectedLoanPayRateTextView;
-    private TextView selectedLoanPaymentsTextView;
-    private TextView selectedLoanTotalNumberOfPaymentsTextView;
-    private TextView selectedLoanTotalPayTextView;
-    private TextView selectedLoanTotalInterestTextView;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +27,10 @@ public class SavedLoansActivity extends AppCompatActivity implements AdapterView
         ArrayList<Loan> loans = db.getLoans();
         //Use the custom adapter for the custom  view to be inflated
         loanAdapter = new LoanAdapter(this, R.layout.saved_loans_listview, loans);
-        loansListView = (ListView) findViewById(R.id.loansListView);
+        loansListView = findViewById(R.id.loansListView);
         loansListView.setAdapter(loanAdapter);
         loansListView.setOnItemClickListener(this);
+
 
     }
 
@@ -53,6 +42,28 @@ public class SavedLoansActivity extends AppCompatActivity implements AdapterView
 
         SelectedLoanDialog dialog = new SelectedLoanDialog(this, selectedLoan);
         dialog.show();
-
     }
+
+    //Refreshes the list & used on LoanSavedDialog.class
+    public void refreshLoanList() {
+        // Clear the existing list of loans
+        loanAdapter.clear();
+
+        // Reload data from the database
+        ArrayList<Loan> loans = db.getLoans();
+
+        // Update the adapter with the new data
+        loanAdapter.addAll(loans);
+
+        // Notify the adapter that the data set has changed
+        loanAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshLoanList();
+    }
+
+
 }
